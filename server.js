@@ -18,12 +18,13 @@ mongoose
   )
   .then(() => console.log("mongoDB Connected..."))
   .catch((err) => {
-    console.log("mongoDB refused to connect...", err);
+    console.log("mongoDB refused to connect...\n", err);
   });
-  
+
 mongoose.Promise = global.Promise;
 
 app.use(morgan("dev"));
+app.use('/uploads',express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
