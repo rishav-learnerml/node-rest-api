@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const multer = require("multer");
+const checkAuth = require("../authMiddleware/check-auth");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -89,7 +90,7 @@ router.get("/:productId", (req, res, next) => {
     });
 });
 
-router.post("/", upload.single("productImage"), (req, res, next) => {
+router.post("/", checkAuth, upload.single("productImage"), (req, res, next) => {
   console.log(req.file);
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
@@ -110,6 +111,7 @@ router.post("/", upload.single("productImage"), (req, res, next) => {
           _id: result._id,
           request: {
             type: "GET",
+            description: "GET_THIS_PRODUCT",
             url: `http://localhost:5000/products/${result._id}`,
           },
         },
@@ -121,7 +123,7 @@ router.post("/", upload.single("productImage"), (req, res, next) => {
     });
 });
 
-router.patch("/:productId", (req, res, next) => {
+router.patch("/:productId", checkAuth, (req, res, next) => {
   const productId = req.params.productId;
   const updateOps = {};
   for (const ops of req.body) {
@@ -134,6 +136,7 @@ router.patch("/:productId", (req, res, next) => {
         message: "Product Updated",
         request: {
           type: "GET",
+          description: "GET_THIS_PRODUCT",
           url: `http://localhost:5000/products/${productId}`,
         },
       });
@@ -144,7 +147,7 @@ router.patch("/:productId", (req, res, next) => {
     });
 });
 
-router.delete("/:productId", (req, res, next) => {
+router.delete("/:productId", checkAuth, (req, res, next) => {
   const productId = req.params.productId;
   Product.remove({ _id: productId })
     .exec()
@@ -153,6 +156,7 @@ router.delete("/:productId", (req, res, next) => {
         message: `product with ID: ${productId} is deleted`,
         request: {
           type: "POST",
+          description: "GET_ALL_PRODUCTS",
           url: "http://localhost:5000/products",
           body: {
             name: "String",

@@ -12,6 +12,8 @@ Get, Post and delete Order requests at http://localhost:5000/orders
 
 Get details about individual order / product
 
-User Signup(POST) at http://localhost:5000/users/
+User Signup(POST) at http://localhost:5000/users/signup
 
-Delete User at http://localhost:5000/users/<userId>
+Delete User at http://localhost:5000/users/:userId
+
+user Login(POST) at http://localhost:5000/users/login
