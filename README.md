@@ -4,7 +4,7 @@ This is a rest-api created with node.js with product and order data.
 
 # Quick Start:
 
-Run "npm install" and then "npm start" to start the server on http://localhost:5000
+Run "npm install" and then "npm start" to start the server on http://localhost:5000/products
 
 Get, Post, Patch and delete Product requests at http://localhost:5000/products
 
