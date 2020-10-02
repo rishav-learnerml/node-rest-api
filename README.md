@@ -1,6 +1,6 @@
 # node-rest-api
 
-This is a rest-api created with node.js with product and order data.
+This is a rest-api created with node.js with product and order data. User Signup, Login and Image Upload are also added.
 
 # Quick Start:
 
